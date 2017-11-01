@@ -1,6 +1,5 @@
 package com.example.jiang.myapplication.`class`
 
-import com.example.jiang.myapplication.`class`.Teacher5.Teacher6
 import org.junit.Test
 import java.util.logging.Logger
 
@@ -90,7 +89,9 @@ open class Teacher4 : Base4() {
         get() = super.a+1
 }
 open class Teacher41(override val a: Int) : Base4() {
-
+    open fun b(){
+        println("超类Teacher41在打印")
+    }
 }
 
 /////////////////  调用超类实现
@@ -100,7 +101,7 @@ open class Teacher41(override val a: Int) : Base4() {
 open class Base5{
     open val a:Int get() {return  10}
     open fun b(){
-        println("超类在打印")
+        println("超类Base5在打印")
     }
 }
 open class Teacher5 : Base5() {
@@ -112,7 +113,7 @@ open class Teacher5 : Base5() {
     }
 
     // 内部类
-    inner  class Teacher6()  {
+    inner  class Teacher51()  {
         fun g() {
             super@Teacher5.b()    //b  内部类调用外部类的method  需要 super@类名.method
 
@@ -120,8 +121,26 @@ open class Teacher5 : Base5() {
     }
 
      fun c() {
-        Teacher6().g()
+        Teacher51().g()
     }
 
 }
+
+
+/////////////////  覆盖原则  如果两个超类都有相同的方法   在覆盖这个方法的时候  调用super<超类> 来显示指定哪个超类
+interface T {
+    fun b() {   // interface内的方法默认都是open的
+        println("超类T在打印")
+    }
+}
+
+
+   class Teacher6 : Teacher5(),T  {
+
+       override fun b() {
+           //----------------
+           super<T>.b()
+       }
+}
+
 
