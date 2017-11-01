@@ -1,5 +1,6 @@
 package com.example.jiang.myapplication.`class`
 
+import com.example.jiang.myapplication.`class`.Teacher5.Teacher6
 import org.junit.Test
 import java.util.logging.Logger
 
@@ -10,7 +11,7 @@ import java.util.logging.Logger
 class Extend {
     @Test
     fun print() {
-
+        Teacher5().c()
     }
 }
 ///////////////// 主构造函数
@@ -88,3 +89,39 @@ open class Teacher4 : Base4() {
     override val a: Int
         get() = super.a+1
 }
+open class Teacher41(override val a: Int) : Base4() {
+
+}
+
+/////////////////  调用超类实现
+
+
+
+open class Base5{
+    open val a:Int get() {return  10}
+    open fun b(){
+        println("超类在打印")
+    }
+}
+open class Teacher5 : Base5() {
+    override val a: Int
+        get() = super.a+1   //a 直接调用super.    和java 一样
+
+    override fun b() {
+        super.b()
+    }
+
+    // 内部类
+    inner  class Teacher6()  {
+        fun g() {
+            super@Teacher5.b()    //b  内部类调用外部类的method  需要 super@类名.method
+
+        }
+    }
+
+     fun c() {
+        Teacher6().g()
+    }
+
+}
+
