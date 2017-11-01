@@ -23,9 +23,9 @@ class Customer(name:String){
         println("AppStore")
     }
 }
-class Customer1 public  @Inject constructor(name: String){
+//class Customer1 public  @Inject constructor(name: String){
 
-}
+//}
 ///////////////// 次要构造函数
 
 class Customer2{
@@ -65,14 +65,26 @@ open class Base2{
     open fun a(){}
 }
 open class Teacher2 : Base2() {
-    override fun a() {  //  如果不想让Teacher3 覆盖此方法只需要  final 即可
+  /*final*/  override fun a() {  //  如果不想让Teacher3 覆盖此方法只需要  final 即可
         super.a()
     }
 }
 
 class Teacher3 : Teacher2() {
     override fun a() {
-
         super.a()
     }
+}
+///////////////// 覆盖属性(和覆盖方法类似 需要指明  open 关键字)
+//你也可以用一个 var 属性覆盖一个 val 属性，但反之则不行。这是允许的，因为一个 val 属性本质上声明了一个 getter 方法，
+// 而将其覆盖为 var 只是在子类中额外声明一个 setter 方法。
+
+
+
+open class Base4{
+    open val a:Int get() {return  10}
+}
+open class Teacher4 : Base4() {
+    override val a: Int
+        get() = super.a+1
 }
