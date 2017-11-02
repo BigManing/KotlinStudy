@@ -32,6 +32,15 @@ fun d(x: Comparable<Number>) {
 }
 ///////////////////////////////////////////////////////////////////////////
 // 个人理解
-// out-- super  生产者  下限
-// in---extend   消费者  上限
+//todo out  in 不是很理解
 ///////////////////////////////////////////////////////////////////////////
+
+
+//默认的上界（如果没有声明）是 Any?。在尖括号中只能指定一个上界。
+// 如果同一类型参数需要多个上界，我们需要一个单独的 where-子句：
+
+//fun <T> cloneWhenGreater(list: List<T>, threshold: T): List<T>
+//        where T : Comparable,
+//              T : Cloneable {
+//    return list.filter { it > threshold }.map { it.clone() }
+//}
