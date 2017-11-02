@@ -16,19 +16,25 @@ import org.junit.Test
 data class User(val name: String, var age: Int, val s: String)
 
 // 此时会生成无参的构造函数
-data class User1(val name: String = "", var age: Int = 1, val s: String = "")  //
+data class User1(val name: String = "", val age: Int = 1, val s: String = "")  //
 
 
 class Data {
     @Test
     fun t() {
         val user = User("张三", 10, "ok")
-        user.age = 10
 ///////////////////////////////////////////////////////////////////////////
 // 复制  把需要变更的写在参数里
 ///////////////////////////////////////////////////////////////////////////
         val copy = user.copy(name = "李四")
         println(copy.toString())
+
+        ///////////////////////////////////////////////////////////////////////////
+        // 结构声明  为数据生成的component 函数可以使他们在结构声明中使用
+        ///////////////////////////////////////////////////////////////////////////
+        val (name,age,s)=copy
+        println("name = ${name}")
+
     }
 }
 
