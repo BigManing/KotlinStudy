@@ -14,7 +14,7 @@ class Ext {
     @Test
     fun print() {
         val list = mutableListOf(1, 2, 3)
-        list.swap(0,2)
+        list.swap(0, 2)
     }
 }
 
@@ -24,18 +24,19 @@ class Ext {
 /*
 * this  ： 被扩展对象
 * */
-fun <T> MutableList<T>.swap(x:Int,y:Int) {
+fun <T> MutableList<T>.swap(x: Int, y: Int) {
     var i1 = this[x]
-    this[x]=this[y]
-    this[y]=i1
+    this[x] = this[y]
+    this[y] = i1
 }
 
 ///////////////////////////////////////////////////////////////////////////
 // 扩展函数是静态分发的 * 通过定义一个扩展，你并没有在一个类中插入新成员， 仅仅是可以通过该类型的变量用点表达式去调用这个新函数。
 
 ///////////////////////////////////////////////////////////////////////////
-open  class C
-class D: C()
+open class C
+
+class D : C()
 
 fun C.foo() {
     println("c")
@@ -58,16 +59,33 @@ class E : C() {
         println("e")
     }
 }
+
 fun E.foo() {
     println("扩展函数")
 }
+
 //E().foo()    打印的是e
 ///////////////////////////////////////////////////////////////////////////
 // 类 可以为null  我们在扩展函数里来判断它
 ///////////////////////////////////////////////////////////////////////////
-fun Any?.toString():String {
+fun Any?.toString(): String {
     if (this == null) {
         return "null"
     }
     return toString();
+}
+
+///////////////////////////////////////////////////////////////////////////
+// 扩展属性
+// 由于扩展没有实际的将成员插入类中，因此对扩展属性来说幕后字段是无效的。
+// 这就是为什么扩展属性不能有初始化器。他们的行为只能由显式提供的 getters/setters 定义。
+///////////////////////////////////////////////////////////////////////////
+val<T> List<T>.lastIndexMy: Int
+    get() = size - 1
+
+//val<T> List<T>.lastIndexMy1: Int=2   这个就是错误的
+
+
+fun f() {
+    println(listOf(1, 2).lastIndexMy)
 }
