@@ -34,6 +34,8 @@ class Data {
         ///////////////////////////////////////////////////////////////////////////
         val (name,age,s)=copy
         println("name = ${name}")
+//         这个(key,value)就是对map.Entry的解构    好理解吧
+        emptyMap<String,String>().map { (key,value)-> println(value) }
 
     }
 }
