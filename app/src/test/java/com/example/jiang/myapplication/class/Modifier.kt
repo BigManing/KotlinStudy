@@ -35,6 +35,7 @@ class Subclass : Outer() {
     // b、c、d 可见
     // Nested 和 e 可见
 
+
     override val b = 5   // “b”为 protected
 }
 
@@ -42,4 +43,15 @@ class Unrelated(o: Outer) {
     // o.a、o.b 不可见
     // o.c 和 o.d 可见（相同模块）
     // Outer.Nested 不可见，Nested::e 也不可见
+
 }
+/*
+* 模块
+
+可见性修饰符 internal 意味着该成员只在相同模块内可见。更具体地说， 一个模块是编译在一起的一套 Kotlin 文件：
+
+一个 IntelliJ IDEA 模块；
+一个 Maven 项目；
+一个 Gradle 源集；
+一次 ＜kotlinc＞ Ant 任务执行所编译的一套文件。
+* */
