@@ -2,7 +2,6 @@ package com.example.jiang.myapplication.`class`
 
 import org.junit.Test
 import kotlin.properties.Delegates
-import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
@@ -114,4 +113,14 @@ fun mapTest() {
     println(lazyUser3.name+"" +
             ":" +
             lazyUser3.age)
+}
+///////////////////////////////////////////////////////////////////////////
+// 局部委托 从1.1开始
+/////////////////// ////////////////////////////////////////////////////////
+// 伪代码
+fun myBy(x: Int) {
+    val  count :Int by lazy { x }
+    if (3==2) {   // 只有这个表达式成立时  才会初始化count
+        println(count)
+    }
 }
