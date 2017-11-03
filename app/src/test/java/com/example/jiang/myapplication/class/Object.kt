@@ -12,7 +12,7 @@ import org.junit.Test
 class A {
     @Test
     fun t() {
-
+        MyClass.Companion.print()
     }
 }
 
@@ -22,13 +22,15 @@ class A {
 class CC {
 
     // 返回的就是匿名对象
-     private  fun  foo() = object {
+    private fun foo() = object {
         val x: String = "x"
     }
+
     //  返回的是Any类型  不能访问其中的x
     public fun foo1() = object {
         val x: String = "x"
     }
+
     fun ct() {
         foo().x
 //        foo1().x
@@ -41,7 +43,37 @@ class CC {
 ///////////////////////////////////////////////////////////////////////////
 
 
-object  L : IndexOutOfBoundsException("我的角标越界")
+object L : IndexOutOfBoundsException("我的角标越界")
+object MyListener
 
 
+///////////////////////////////////////////////////////////////////////////
+// 伴生对象 关键字  companion
+///////////////////////////////////////////////////////////////////////////
+/*
+*
+* 不省略---
+* */
+class MyClass {
+    companion object Factory {
+        fun create(): MyClass {
+            return MyClass()
+        }
+    }
+}
 
+class MyClass1 {
+    companion object {  //  伴生对象的名字可以省略
+        fun print() {
+            println("伴生对象")
+        }
+    }
+}
+
+fun t() {
+//    伴生对象  有明确的名字时 可以直接调用其内部的方法
+    val myClass = MyClass.create()
+    myClass.toString()
+//    伴生对象的名字可以省略   然后这样调用  MyClass.Companion()
+    MyClass1.Companion.print()
+}
