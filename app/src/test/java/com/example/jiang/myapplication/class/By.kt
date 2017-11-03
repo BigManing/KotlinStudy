@@ -15,6 +15,8 @@ class By {
     fun t() {
         count = 10  //  赋值   会调用dd 的 set。。
         println(count)   // 取值  会调用dd的 get..
+
+        println(lazyValue1)
     }
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -40,6 +42,11 @@ class DD {
 ///////////////////////////////////////////////////////////////////////////
 
 
-val  lazyValue1: String by lazy{"普通的延迟加载-- 默认就是 多线程同步的  "}
+val  lazyValue1: String by lazy{
+    println("---只会在第一次加载的时候 打印---")
+    "普通的延迟加载-- 默认就是 多线程同步的  "
+}
 val  lazyValue2: String by lazy(LazyThreadSafetyMode.PUBLICATION,{"LazyThreadSafetyMode.PUBLICATION"})
 val  lazyValue3: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED,{"多线程同步  延迟 属性"})
+
+
