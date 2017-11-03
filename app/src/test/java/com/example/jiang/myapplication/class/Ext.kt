@@ -139,3 +139,5 @@ class F {
 //C().caller(D())   // 输出 "D.foo in C"
 //C1().caller(D())  // 输出 "D.foo in C1" —— 分发接收者虚拟解析
 //C().caller(D1())  // 输出 "D.foo in C" —— 扩展接收者静态解析
+// todo  个人理解  caller后 会查看 d1 有没有。foo这个方法（内部方法） --》然后查找d？
+//todo 都没 有  就用 父类的扩展函数来
