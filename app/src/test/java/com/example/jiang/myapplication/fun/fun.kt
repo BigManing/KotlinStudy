@@ -41,7 +41,7 @@ class funB : funA() {
 他们只有一个参数；
 他们用 infix 关键字标注。
 * */
-infix fun Int.shl(x: Int):Int{
+infix fun Int.shl(x: Int): Int {
     return 1
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -52,3 +52,28 @@ infix fun Int.shl(x: Int):Int{
 * 2 类里面
 * 3 函数里面
 * */
+
+
+///////////////////////////////////////////////////////////////////////////
+// 尾递归
+///////////////////////////////////////////////////////////////////////////
+
+/*限制条件
+1  最后一行代码 是本方法的自调用    使用tailrec关键字
+2 仅使用在jvm后端中
+* */
+tailrec fun findFixPoint(x: Double = 1.0): Double
+        = if (x == Math.cos(x)) x else findFixPoint(x)
+
+//它等同于下面的方法
+fun findFixPoint1(): Double {
+    var x = 1.0
+    while (true) {
+        val y = Math.cos(x)
+        if (x == y) {
+            return y
+        }
+        x = y
+    }
+}
+
