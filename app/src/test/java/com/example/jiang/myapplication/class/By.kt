@@ -1,5 +1,6 @@
 package com.example.jiang.myapplication.`class`
 
+import android.support.v4.content.res.FontResourcesParserCompat
 import org.junit.Test
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
@@ -119,6 +120,7 @@ fun mapTest() {
 /////////////////// ////////////////////////////////////////////////////////
 // 伪代码
 fun myBy(x: Int) {
+
     val  count :Int by lazy { x }
     if (3==2) {   // 只有这个表达式成立时  才会初始化count
         println(count)
@@ -151,3 +153,7 @@ property —— 同 getValue()；
 new value —— 必须和属性同类型或者是它的超类型。
 
 * */
+
+///////////////////////////////////////////////////////////////////////////
+// 提供委托（自 1.1 起） todo  不甚了解
+///////////////////////////////////////////////////////////////////////////
