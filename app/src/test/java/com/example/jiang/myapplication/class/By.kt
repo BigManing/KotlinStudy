@@ -17,6 +17,12 @@ class By {
         println(count)   // 取值  会调用dd的 get..
 
         println(lazyValue1)
+        println(lazyValue1)
+
+        var lazyUser = LazyUser()
+        lazyUser.name="ok"
+        lazyUser.name="no"
+
     }
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -50,3 +56,16 @@ val  lazyValue2: String by lazy(LazyThreadSafetyMode.PUBLICATION,{"LazyThreadSaf
 val  lazyValue3: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED,{"多线程同步  延迟 属性"})
 
 
+///////////////////////////////////////////////////////////////////////////
+// -- observable  可观察属性
+///////////////////////////////////////////////////////////////////////////
+/*构造参数里面是默认值，
+*
+* 每当name 变动时就会出发 onchange 函数
+* */
+class  LazyUser{
+    var  name :String by Delegates.observable("张三"){
+        property, oldValue, newValue ->
+        println("property = [${property}], oldValue = [${oldValue}], newValue = [${newValue}]")
+    }
+}
