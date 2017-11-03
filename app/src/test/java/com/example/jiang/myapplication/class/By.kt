@@ -34,6 +34,7 @@ class By {
         println(lazyUser1.name)
 
 
+        mapTest()
     }
 }
 
@@ -93,4 +94,24 @@ class LazyUser1 {
         }
         !equals
     }
+}
+///////////////////////////////////////////////////////////////////////////
+// map 属性委托    map中以属性为key  存储着所有的数据
+///////////////////////////////////////////////////////////////////////////
+
+/* 要想获取name  去map 里面找*/
+class  LazyUser3(val map1: Map<String, Any?>){
+    val name:String by map1
+    val age:Int by map1
+}
+
+fun mapTest() {
+    val lazyUser3 = LazyUser3(mapOf(
+            "name".to("张三"),
+            "age".to(10)
+    ))
+    println()
+    println(lazyUser3.name+"" +
+            ":" +
+            lazyUser3.age)
 }
