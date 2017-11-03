@@ -26,7 +26,7 @@ class By {
 class DD {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
         println("取值:")
-//        return 10
+        return 10
     }
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
@@ -34,3 +34,12 @@ class DD {
 
     }
 }
+
+///////////////////////////////////////////////////////////////////////////
+// -- lazy  延迟属性
+///////////////////////////////////////////////////////////////////////////
+
+
+val  lazyValue1: String by lazy{"普通的延迟加载-- 默认就是 多线程同步的  "}
+val  lazyValue2: String by lazy(LazyThreadSafetyMode.PUBLICATION,{"LazyThreadSafetyMode.PUBLICATION"})
+val  lazyValue3: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED,{"多线程同步  延迟 属性"})
