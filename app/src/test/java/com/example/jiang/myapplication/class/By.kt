@@ -15,16 +15,28 @@ class By {
     fun t() {
         count = 10  //  赋值   会调用dd 的 set。。
         println(count)   // 取值  会调用dd的 get..
+        println()
 
         println(lazyValue1)
         println(lazyValue1)
+        println()
+
 
         var lazyUser = LazyUser()
-        lazyUser.name="ok"
-        lazyUser.name="no"
+        lazyUser.name = "ok"
+        lazyUser.name = "no"
+        println()
+
+
+        var lazyUser1 = LazyUser1()
+        lazyUser1.name = "o000"
+        lazyUser1.name = "ok"
+        println(lazyUser1.name)
+
 
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////
 // 委托    基本语法：var/val  <xx> : <类型> by  <xx表达式>
 ///////////////////////////////////////////////////////////////////////////
@@ -48,12 +60,12 @@ class DD {
 ///////////////////////////////////////////////////////////////////////////
 
 
-val  lazyValue1: String by lazy{
+val lazyValue1: String by lazy {
     println("---只会在第一次加载的时候 打印---")
     "普通的延迟加载-- 默认就是 多线程同步的  "
 }
-val  lazyValue2: String by lazy(LazyThreadSafetyMode.PUBLICATION,{"LazyThreadSafetyMode.PUBLICATION"})
-val  lazyValue3: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED,{"多线程同步  延迟 属性"})
+val lazyValue2: String by lazy(LazyThreadSafetyMode.PUBLICATION, { "LazyThreadSafetyMode.PUBLICATION" })
+val lazyValue3: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED, { "多线程同步  延迟 属性" })
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -63,9 +75,22 @@ val  lazyValue3: String by lazy(LazyThreadSafetyMode.SYNCHRONIZED,{"多线程同
 *
 * 每当name 变动时就会出发 onchange 函数
 * */
-class  LazyUser{
-    var  name :String by Delegates.observable("张三"){
-        property, oldValue, newValue ->
+class LazyUser {
+    var name: String by Delegates.observable("张三") { property, oldValue, newValue ->
         println("property = [${property}], oldValue = [${oldValue}], newValue = [${newValue}]")
+    }
+}
+
+/*
+* 这个方法是否决特定的操作  如果名字变为ok  就拒接
+* */
+class LazyUser1 {
+    var name: String by Delegates.vetoable("李四") { property, oldValue, newValue ->
+
+        var equals = newValue.equals("ok")
+        if (equals) {
+            println("新该的名字为ok  拒绝它")
+        }
+        !equals
     }
 }
