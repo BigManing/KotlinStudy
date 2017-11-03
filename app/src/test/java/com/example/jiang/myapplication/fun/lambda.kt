@@ -1,5 +1,6 @@
 package com.example.jiang.myapplication.`fun`
 
+import android.support.v4.R
 import com.example.jiang.myapplication.`class`.T
 import org.junit.Test
 import java.util.concurrent.locks.Lock
@@ -14,6 +15,7 @@ class AAA {
     @Test
     fun p() {
         myOperation()
+        myTransactionOperation()
     }
 }
 
@@ -44,4 +46,23 @@ fun myOperation() {
         "调用lock ， 参数方法的具体实现写在了最外面的{} 里面"
     }
     )
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+// map 例子 分析
+///////////////////////////////////////////////////////////////////////////
+
+//  list的 map 效果  这里用到了 泛型
+fun <T, R> List<T>.myTransaction(ff: (T) -> R): List<R> {
+    val list = arrayListOf<R>()
+    forEach { list.add(ff(it)) }
+    return list
+}
+
+// 调用高级函数
+fun myTransactionOperation() {
+    println()
+    val orignal = listOf<Int>(1, 2, 3)
+    println(orignal.myTransaction { it.times(2) })   // 结果位2 4 6
 }
