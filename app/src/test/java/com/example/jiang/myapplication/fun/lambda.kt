@@ -16,6 +16,7 @@ class AAA {
     fun p() {
         myOperation()
         myTransactionOperation()
+        myXiaHuaXian()
     }
 }
 
@@ -69,4 +70,13 @@ fun myTransactionOperation() {
     })
 //    todo  sortedBy    升序排序   指定按照哪个字段来来升序  如user.name  user.age
 //    降序排序  用sortedByDescending 来实现
+}
+
+///////////////////////////////////////////////////////////////////////////
+// 下划线代表未使用的变量   结合  解构
+///////////////////////////////////////////////////////////////////////////
+fun myXiaHuaXian() {
+    println()
+    mapOf("a".to(1), "b".to(2)).forEach { _, value -> println(value) }
+    mapOf("a".to(1), "b".to(2)).forEach { println("$it") }
 }
