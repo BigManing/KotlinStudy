@@ -20,6 +20,7 @@ class AAA {
         myXiaHuaXian()
         myMax()
         myClose()
+        myTrue()
     }
 }
 
@@ -121,4 +122,44 @@ fun myClose() {
     var count = 0
     listOf<Int>(1, 2).forEach { count += it }
     println("闭包值：" + count)
+
 }
+///////////////////////////////////////////////////////////////////////////
+// 带接受者的函数字面值
+///////////////////////////////////////////////////////////////////////////
+
+//var  mySum:  Int.(other :Int) ->Int
+//
+//1.mysum(2)
+
+//val mySun : fun Int.(other:Int):Int=this+other
+
+val represent: String.(Int) -> Boolean = { other -> toIntOrNull() == other }
+
+fun testOperation(op: (String, Int) -> Boolean, a: String, b: Int, c: Boolean) {
+    assert(op(a, b) == c)
+}
+
+fun myTrue() {
+    testOperation(represent, "1", 1, true)
+}
+
+/*例子
+* 当接受者类型可以从上下文中推断时，lamda表达式可以用作带接受者的函数字面值
+* */
+
+class HTML {
+    fun body() {
+
+    }
+}
+
+fun html(init: HTML.() -> Unit): HTML {
+    val html = HTML()
+    html.init()  //todo  为什么html能调用init方法
+    return html
+
+}
+//html{
+//    body()
+//}
