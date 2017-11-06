@@ -17,6 +17,7 @@ class AAA {
         myOperation()
         myTransactionOperation()
         myXiaHuaXian()
+        myMax()
     }
 }
 
@@ -79,4 +80,23 @@ fun myXiaHuaXian() {
     println()
     mapOf("a".to(1), "b".to(2)).forEach { _, value -> println(value) }
     mapOf("a".to(1), "b".to(2)).forEach { println("$it") }
+}
+
+///////////////////////////////////////////////////////////////////////////
+// 参数的类型
+///////////////////////////////////////////////////////////////////////////
+/*这里定义一个高阶函数*/
+fun <T> max(c: Collection<T>, less: (T, T) -> Boolean): T? {
+    var v: T? = null
+    for (it in c) {
+        if (v == null || less(v, it)) {
+            v = it
+        }
+    }
+    return v
+}
+
+fun myMax() {
+    println()
+    println("最大值：" + max(listOf(1, 2, 3), { a, b -> a < b }))
 }
