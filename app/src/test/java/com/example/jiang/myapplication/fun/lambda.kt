@@ -2,6 +2,7 @@ package com.example.jiang.myapplication.`fun`
 
 import android.support.v4.R
 import com.example.jiang.myapplication.`class`.T
+import com.example.jiang.myapplication.`class`.i
 import org.junit.Test
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
@@ -18,6 +19,7 @@ class AAA {
         myTransactionOperation()
         myXiaHuaXian()
         myMax()
+        myClose()
     }
 }
 
@@ -106,3 +108,17 @@ fun myMax() {
 // 这意味着 lambda 表达式中的 return 将从包含它的函数返回，
 // 而匿名函数中的 return 将从匿名函数自身返回。
 ///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+// 闭包
+///////////////////////////////////////////////////////////////////////////
+/*Lambda 表达式或者匿名函数（以及局部函数和对象表达式） 可以访问其 闭包 ，即在外部作用域中声明的变量。
+ 与 Java 不同的是可以修改闭包中捕获的变量：
+
+*/
+fun myClose() {
+    println()
+    var count = 0
+    listOf<Int>(1, 2).forEach { count += it }
+    println("闭包值：" + count)
+}
