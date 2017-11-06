@@ -43,7 +43,7 @@ fun myOperation() {
 
     println("lock：" + lock(ReentrantLock(), { "调用lock ，普通写法-lambda" }))
     println("lock：" + lock(ReentrantLock()) {
-        "调用lock ， 参数方法的具体实现写在了最外面的{} 里面"
+        "调用lock ， 如果最后一个参数是 函数，那么 最后一个参数的的具体实现写在了最外面的{} 里面"
     }
     )
 }
@@ -63,6 +63,10 @@ fun <T, R> List<T>.myTransaction(ff: (T) -> R): List<R> {
 // 调用高级函数
 fun myTransactionOperation() {
     println()
-    val orignal = listOf<Int>(1, 2, 3)
-    println(orignal.myTransaction { it.times(2) })   // 结果位2 4 6
+    val orignal = listOf<Int>(1, 22, 3)
+    println(orignal.myTransaction { it.times(2) }.sortedByDescending {
+        it
+    })
+//    todo  sortedBy    升序排序   指定按照哪个字段来来升序  如user.name  user.age
+//    降序排序  用sortedByDescending 来实现
 }
