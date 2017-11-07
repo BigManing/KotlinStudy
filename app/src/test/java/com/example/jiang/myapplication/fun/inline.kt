@@ -15,7 +15,17 @@ import org.junit.Test
 
 class Inline {
     @Test
-    fun ok() {
+    fun myReturn() {
+        ///////////////////////////////////////////////////////////////////////////
+        // 这种返回（位于 lambda 表达式中，但退出包含它的函数）称为非局部返回。
+        // 我们习惯了在循环中用这种结构，其内联函数通常包含：
+        ///////////////////////////////////////////////////////////////////////////
+        fun isOK(): Boolean {
+//            return listOf(1, 2).filter { it == 0 }.size > 0
+            listOf(1, 2).forEach { if (it == 0) return true }
+            return false
+        }
+        println("集合中是否有为0的元素：" + isOK())
 
     }
 }
