@@ -32,12 +32,27 @@ class Inline {
     ///////////////////////////////////////////////////////////////////////////
 // 请注意，一些内联函数可能调用传给它们的不是直接来自函数体、而是来自另一个执行上下文的 lambda 表达式参数，
 // 例如来自局部对象或嵌套函数。在这种情况下，该 lambda 表达式中也不允许非局部控制流。为了标识这种情况，
-// 该 lambda 表达式参数需要用 crossinline 修饰符标记:
+// 该 lambda 表达式参数需要用
+// todo crossinline 修饰符标记:
 ///////////////////////////////////////////////////////////////////////////
     inline fun f(crossinline body: () -> Unit) {
         var f = object : Runnable {
             override fun run() = body()
         }
-//      ... ... 
     }
+    ///////////////////////////////////////////////////////////////////////////
+    // 具体化的类型参数
+    ///////////////////////////////////////////////////////////////////////////
+    /*1 普通的写法以及调用 */
+
+//    fun <T> TreeNode.findParentOfType(clazz: Class<T>):T? {
+//        var  p=parent
+//        while (p != null && clazz.isInstance(p)) {
+//            p=p.parent
+//        }
+//        return  p as T?
+//
+//    }
+//    TreeNode.findParentOfType(MyTreeNode::class.java)
+
 }
