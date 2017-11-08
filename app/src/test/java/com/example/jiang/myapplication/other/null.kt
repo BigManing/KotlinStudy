@@ -48,6 +48,5 @@ class Null {
         val nullList: List<Int?> = listOf(1, 2, null, 9)
         val filterNotNull = nullList.filterNotNull()
         println("filterNotNull = ${filterNotNull}")  //filterNotNull = [1, 2, 9]  去掉了null元素
-
     }
 }
