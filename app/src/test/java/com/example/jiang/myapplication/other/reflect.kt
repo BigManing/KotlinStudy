@@ -1,5 +1,6 @@
 package com.example.jiang.myapplication.other
 
+import com.example.jiang.myapplication.`class`.AAA
 import org.junit.Test
 
 /**
@@ -17,6 +18,11 @@ class Reflect {
     @Test
     fun print() {
         println(c.simpleName)
+        ///////////////////////////////////////////////////////////////////////////
+        //2 绑定的类引用   在类型判断的时候可以更加的具体
+        ///////////////////////////////////////////////////////////////////////////
+        var a = AAA()
+        assert(a is AAA) { "返回成功：${a::class.simpleName}" }
 
     }
 
