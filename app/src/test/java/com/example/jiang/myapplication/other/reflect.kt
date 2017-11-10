@@ -19,6 +19,7 @@ class Reflect {
     */
     val c = this::class  // Kclass
     val jc = this.javaClass  // java class
+    var x = 0
     @Test
     fun print() {
         println(jc.simpleName)
@@ -41,6 +42,27 @@ class Reflect {
 
 //        val numbers = listOf(1, 2, 3)
 //        fun isOdd(x: Int) = x % 2 != 0
-//        println(numbers.filter(::isOdd)) // 输出 [1, 3]
+//        println(numbers.filter(::isOdd)) // 输出 [1, 3];
+
+        ///////////////////////////////////////////////////////////////////////////
+        // 4 属性引用
+        ///////////////////////////////////////////////////////////////////////////
+        /*
+
+       val a=    ::x   作为一等对象   KProperty<T>
+        ::x.name
+        ar a=::x   KMutableProperty<T>
+       */
+        // 属性引用可以用在不需要参数的函数处
+        val strs = listOf("a", "bc", "def")
+        strs.map(String::length)  // 1,2,3
+
+
+
     }
+
+    // 扩展属性
+    val String.lastChar: Char
+        get() = this[length - 1]
+
 }
