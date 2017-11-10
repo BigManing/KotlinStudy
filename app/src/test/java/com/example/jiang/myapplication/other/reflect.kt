@@ -36,7 +36,8 @@ class Reflect {
 //        下面这两个是同效的
 //        println(list.filter(::isNotTwo))
         println(list.filter { isNotTwo(it) })
-//
+        // 你可以通过将方法引用存储在具有显式指定类型的变量中来提供必要的上下文：
+        var p: (Int) -> Boolean = ::isNotTwo
 
 //        val numbers = listOf(1, 2, 3)
 //        fun isOdd(x: Int) = x % 2 != 0
