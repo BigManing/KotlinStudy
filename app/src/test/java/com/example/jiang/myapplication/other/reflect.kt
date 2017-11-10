@@ -57,12 +57,32 @@ class Reflect {
         val strs = listOf("a", "bc", "def")
         strs.map(String::length)  // 1,2,3
 
-
-
+        getKotlin()
     }
 
     // 扩展属性
     val String.lastChar: Char
         get() = this[length - 1]
 
+}
+
+///////////////////////////////////////////////////////////////////////////
+// 和java反射的互操作性
+///////////////////////////////////////////////////////////////////////////
+class AA(val p: String)
+
+/*
+在Java平台上，标准库包含反射类的扩展，它提供了与 Java 反射对象之间映射（参见 kotlin.reflect.jvm 包）。
+ 例如，要查找一个用作 Kotlin 属性 getter 的 幕后字段或 Java方法，可以这样写：
+*/
+fun getJavaClass() {
+//    println(AA::p.javaGetter)  // AA.getP()
+//    println(AA::p.javaField)  // AA.p
+}
+
+fun getKotlin() {
+    val java = AA::class.java
+    val kClass = AA::class
+    println(kClass)
+    println(java)
 }
