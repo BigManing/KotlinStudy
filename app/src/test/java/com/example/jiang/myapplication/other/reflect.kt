@@ -99,3 +99,21 @@ fun cc(factory: () -> AA) {
     val a: AA = factory()
 }
 //等价于 fun cc(::AA)
+
+///////////////////////////////////////////////////////////////////////////
+// 绑定的函数和属性引用
+///////////////////////////////////////////////////////////////////////////
+/*
+取代直接调用方法 matches 的是我们存储其引用。 这样的引用会绑定到其接收者上。
+它可以直接调用（如上例所示）或者用于任何期待一个函数类型表达式的时候
+*/
+fun myProperty() {
+
+    var xxx = "".toRegex()
+
+    val numberRegex = "\\d+".toRegex()
+    println(numberRegex.matches("29")) // 输出“true”
+
+    val isNumber = numberRegex::matches
+    println(isNumber("29")) // 输出“true”
+}
