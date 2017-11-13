@@ -24,3 +24,12 @@ public class MyClass {
  * demo.Utils.foo();
  * demo.Utils.bar();
  */
+
+///////////////////////////////////////////////////////////////////////////
+// 实例字段
+///////////////////////////////////////////////////////////////////////////
+class JavaClient {
+    public String getId(C c) {
+        return c.ID + c.getA();  //如果没有@JvmField修饰 就只能用get...
+    }
+}

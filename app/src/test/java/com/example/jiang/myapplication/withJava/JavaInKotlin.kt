@@ -16,6 +16,7 @@ class JavaInKotlin {
         }
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////
 // ``  反引符 来转义java中 is  object as 等关键字
 // 因为这些是空调林中的关键字
@@ -37,3 +38,9 @@ fun kebiancanshu(): Unit {
 //external fun foo(): Unit {
 //
 //}
+
+class C(id: String) {
+    @JvmField
+    val ID = id
+    val a = id
+}
