@@ -14,3 +14,13 @@ public class MyClass {
         JavaInKotlinKt.kebiancanshu();
     }
 }
+///////////////////////////////////////////////////////////////////////////
+// 在kotlin中
+// @file:JvmName("aaa")   标示文件名字
+// @JvmMultifileClass     允许相同的名字的文件出现
+///////////////////////////////////////////////////////////////////////////
+
+/**
+ * demo.Utils.foo();
+ * demo.Utils.bar();
+ */
