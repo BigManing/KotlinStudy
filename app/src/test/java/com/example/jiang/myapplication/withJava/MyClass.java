@@ -1,5 +1,7 @@
 package com.example.jiang.myapplication.withJava;
 
+import kotlin.jvm.functions.Function5;
+
 /**
  * Created by BigManing on 17-11-13.
  * 引用kotlin中的东西
@@ -31,5 +33,15 @@ public class MyClass {
 class JavaClient {
     public String getId(C c) {
         return c.ID + c.getA();  //如果没有@JvmField修饰 就只能用get...
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////
+// 静态字段
+///////////////////////////////////////////////////////////////////////////
+class MyStatic {
+    public void cccc() {
+//      jvmfield修饰后的字段   可以在外部静态直接调用
+        System.out.println(Key.comparator.compare(new Key(1), new Key(2)));
     }
 }

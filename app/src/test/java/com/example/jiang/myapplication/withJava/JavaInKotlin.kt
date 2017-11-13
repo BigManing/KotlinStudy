@@ -2,6 +2,7 @@ package com.example.jiang.myapplication.withJava
 
 import org.junit.Test
 import java.util.*
+import kotlin.Comparator
 
 /**
  * Created by BigManing on 17-11-10.
@@ -43,4 +44,22 @@ class C(id: String) {
     @JvmField
     val ID = id
     val a = id
+}
+
+// kotlin中静态字段  不过属性为私有
+
+/*
+在命名对象或伴生对象中声明的 Kotlin 属性会在该命名对象或包含伴生对象的类中具有静态幕后字段。
+
+通常这些字段是私有的，但可以通过以下方式之一暴露出来：
+
+@JvmField 注解；
+lateinit 修饰符；
+const 修饰符。
+*/
+class Key(val c: Int) {
+    companion object {
+        @JvmField
+        val comparator: Comparator<Key> = compareBy<Key>({ it.c })
+    }
 }
