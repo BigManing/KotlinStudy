@@ -49,5 +49,11 @@ class MyStatic {
         // 普通的写法
         Singleton.INSTANCE.getProvider();
         Singleton.INSTANCE.setProvider(new Key(2));
+
+//        const 的调用
+        int aConst = Obj.CONST;
+        int version = C1.VERSION;
+        int max = JavaInKotlinKt.MAX;
+
     }
 }

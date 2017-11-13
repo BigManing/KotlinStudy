@@ -68,3 +68,19 @@ class Key(val c: Int) {
 object Singleton {
     lateinit var provider: Key
 }
+
+
+///////////////////////////////////////////////////////////////////////////
+// const 标注的属性 在java中 会成为静态字段
+///////////////////////////////////////////////////////////////////////////
+object Obj {
+    const val CONST = 1
+}
+
+class C1 {
+    companion object {
+        const val VERSION = 2
+    }
+}
+
+const val MAX = 24
