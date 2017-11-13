@@ -51,9 +51,9 @@ class MyStatic {
         Singleton.INSTANCE.setProvider(new Key(2));
 
 //        const 的调用
-        int aConst = Obj.CONST;
-        int version = C1.VERSION;
-        int max = JavaInKotlinKt.MAX;
+        int aConst = Obj.CONST;  // 命名对象/单例 里 的属性
+        int version = C1.VERSION;  // 伴生对象里面的属性
+        int max = JavaInKotlinKt.MAX;  // 包级别的 字段
 
     }
 }
