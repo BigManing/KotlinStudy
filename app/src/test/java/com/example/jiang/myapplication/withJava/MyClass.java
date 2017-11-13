@@ -78,3 +78,17 @@ class MyStaticMethod {
         Obj1.INSTANCE.bar();
     }
 }
+
+///////////////////////////////////////////////////////////////////////////
+// 重载
+///////////////////////////////////////////////////////////////////////////
+class OO {
+    public void aaa() {
+        MyOver myOver = new MyOver(1, 4);
+        MyOver myOver1 = new MyOver(1);  //  如果没有@JvmOverloads 的修饰   这个方式是不成立的
+
+        myOver.f("a");  // 同上
+        myOver.f("a", "b");  // 同上
+        myOver.f("a", "b", "c");
+    }
+}

@@ -107,3 +107,13 @@ object Obj1 {
 
     fun bar() {}
 }
+
+///////////////////////////////////////////////////////////////////////////
+//重载   JvmOverloads   适用于构造函数  普通函数
+///////////////////////////////////////////////////////////////////////////
+class MyOver @JvmOverloads constructor(x: Int, y: Int = 2) {
+    @JvmOverloads
+    fun f(a: String, b: String = "b", c: String = "c") {
+
+    }
+}
