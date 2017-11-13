@@ -7,5 +7,6 @@ package com.example.jiang.myapplication.withJava;
 public class MyClass {
     public void remove(int... x) {
         System.out.println(x.length);
+
     }
 }
