@@ -43,5 +43,11 @@ class MyStatic {
     public void cccc() {
 //      jvmfield修饰后的字段   可以在外部静态直接调用
         System.out.println(Key.comparator.compare(new Key(1), new Key(2)));
+
+        // 单例 调用静态
+        Singleton.provider = new Key(3);
+        // 普通的写法
+        Singleton.INSTANCE.getProvider();
+        Singleton.INSTANCE.setProvider(new Key(2));
     }
 }

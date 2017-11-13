@@ -63,3 +63,8 @@ class Key(val c: Int) {
         val comparator: Comparator<Key> = compareBy<Key>({ it.c })
     }
 }
+
+// 命名对象 / 伴生对象 延迟初始化的属性 具有属性setter相同的可见性的静态幕后字段
+object Singleton {
+    lateinit var provider: Key
+}
