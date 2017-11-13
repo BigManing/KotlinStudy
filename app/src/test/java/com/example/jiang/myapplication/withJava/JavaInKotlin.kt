@@ -1,7 +1,6 @@
 package com.example.jiang.myapplication.withJava
 
 import org.junit.Test
-import java.time.DayOfWeek
 import java.util.*
 
 /**
@@ -22,3 +21,11 @@ class JavaInKotlin {
 // 因为这些是空调林中的关键字
 ///////////////////////////////////////////////////////////////////////////
 //foo.`is`(bar)
+///////////////////////////////////////////////////////////////////////////
+// java某个参数是可变参数   在kotlin中用*args 来表示这个参数
+///////////////////////////////////////////////////////////////////////////
+fun kebiancanshu(): Unit {
+    val myClass = MyClass()
+    val args = intArrayOf(1, 2, 3)
+    myClass.remove(*args)
+}
