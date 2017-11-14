@@ -12,6 +12,7 @@ class ccc {
     fun a() {
         myCollection()
         newFur()
+        println(true.not())
     }
 }
 
