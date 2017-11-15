@@ -25,4 +25,5 @@ class HardFragment : Fragment() {
         return inflater!!.inflate(R.layout.fragment_hard, container, false)
     }
 
-}// Required empty public constructor
+
+}

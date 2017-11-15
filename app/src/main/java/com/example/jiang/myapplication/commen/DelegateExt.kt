@@ -49,3 +49,4 @@ class MyPreference<T>(val context: Context, val name: String, val default: T) : 
 
     }
 }
+
