@@ -3,13 +3,21 @@ package com.example.jiang.myapplication.module.text
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import android.widget.TextView
 
 import com.example.jiang.myapplication.R
+import com.example.jiang.myapplication.module.text.joke.HardFragment
+import com.example.jiang.myapplication.module.text.joke.JokeFragment
+import kotlinx.android.synthetic.main.fragment_text.*
 
 /**
  * Created by BigManing on 17-11-14.
@@ -19,41 +27,36 @@ import com.example.jiang.myapplication.R
 
 class TextFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (arguments != null) {
-
-        }
-    }
-
+    val tabs: Array<String> = arrayOf("墨客段子", "励志深度")
+    val fragments: Array<Fragment> by lazy { arrayOf(JokeFragment(), HardFragment()) }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater!!.inflate(R.layout.fragment_text, container, false)
     }
 
-    /** 伴生对象*/
-    companion object {
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
-
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TextFragment.
-         */
-
-        fun newInstance(param1: String, param2: String): TextFragment {
-            val fragment = TextFragment()
-            val args = Bundle()
-            args.putString(ARG_PARAM1, param1)
-            args.putString(ARG_PARAM2, param2)
-            fragment.arguments = args
-            return fragment
-        }
+    // onCreateView 后  紧接着调用这个方法
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewPager.offscreenPageLimit = tabs.size
+        viewPager.adapter = TextAdapter(childFragmentManager)
+        tabLayout.tabMode = TabLayout.MODE_FIXED
+        tabLayout.setupWithViewPager(viewPager)
     }
+
+    inner class TextAdapter(pm: FragmentManager) : FragmentPagerAdapter(pm) {
+        override fun getItem(position: Int): Fragment {
+            return fragments[position % tabs.size]
+        }
+
+        override fun getCount(): Int {
+            return tabs.size
+        }
+
+        override fun getPageTitle(position: Int): CharSequence {
+            return tabs[position]
+        }
+
+    }
+
+
 }

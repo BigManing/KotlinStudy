@@ -99,18 +99,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
-            val mFragments: Array<Fragment> = arrayOf(TextFragment(), PicFragment(), GifFragment())
-
-            var mDefaultIndex: Int by preference(this@MainActivity, "sp_key_default_fragment", 0)
-
-            var mCurrentIndex: Int by Delegates.observable(0) { _, _, new ->
-                navigationView.setCheckedItem(when (new) {
-                    0 -> R.id.nav_text
-                    1 -> R.id.nav_pic
-                    2 -> R.id.nav_gif
-                    else -> R.id.nav_text
-                })
-            }
         }
     }
 
