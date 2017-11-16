@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_text.*
 class TextFragment : Fragment() {
 
     val tabs: Array<String> = arrayOf("墨客段子", "励志深度")
+    //    懒加载
     val fragments: Array<Fragment> by lazy { arrayOf(JokeFragment(), HardFragment()) }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

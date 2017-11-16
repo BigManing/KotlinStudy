@@ -1,6 +1,7 @@
 package com.example.jiang.myapplication.module.text.joke
 
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -20,7 +21,8 @@ class JokeAdapter(var mData: List<Joke>) : RecyclerView.Adapter<JokeAdapter.Joke
     override fun getItemCount(): Int = mData.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): JokeViewHolder {
-        return JokeViewHolder(View.inflate(parent?.context, R.layout.item_joke, null))
+        return JokeViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.item_joke, parent, false))
+//        return JokeViewHolder(View.inflate(parent?.context, R.layout.item_joke, null))
     }
 
     override fun onBindViewHolder(holder: JokeViewHolder, position: Int) {
