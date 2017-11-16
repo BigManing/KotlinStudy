@@ -2,7 +2,6 @@ package com.example.jiang.myapplication.module.text.joke
 
 
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -11,12 +10,12 @@ import android.view.ViewGroup
 
 import com.example.jiang.myapplication.R
 import com.example.jiang.myapplication.commen.log
+import com.example.jiang.myapplication.commen.toast
+import com.example.jiang.myapplication.model.bean.Joke
+import com.example.jiang.myapplication.model.service.JokerService
 import kotlinx.android.synthetic.main.fragment_joke.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import kotlin.concurrent.timer
-import kotlin.concurrent.timerTask
 import kotlin.properties.Delegates
 
 
@@ -27,8 +26,8 @@ import kotlin.properties.Delegates
  */
 
 class JokeFragment : Fragment() {
-    var c = 1
-
+    val mData: MutableList<Joke> = arrayListOf()
+    var mPage = 1
     //     标示变更后  相应的
     var mLoading by Delegates.observable(true) { _, _, newValue ->
         mSwipeRefreshLayout.isRefreshing = newValue
@@ -49,11 +48,12 @@ class JokeFragment : Fragment() {
     private fun initEvent() {
 //         刷新加载数据
         mSwipeRefreshLayout.setOnRefreshListener {
-            log("setOnRefreshListener")
+            mPage = 1  // 这是手动刷新 来获取最新的数据
             loadData()
         }
         mRecyclerView.setOnTouchListener { _, _ ->
             if (mLoading.not() && mRecyclerView.canScrollVertically(1).not()) {
+                mPage++
                 loadData()
             }
             false
@@ -62,14 +62,40 @@ class JokeFragment : Fragment() {
     }
 
     private fun loadData() {
-        log("loadData:" + (c++))
-        log("改变加载标示")
         mLoading = true
-        timerTask { }
-        Handler().postDelayed({
-            log("过了两秒  就不用加载了")
-            mLoading = false
-        }, 2000)
+        doAsync {
+            val data = JokerService.getData(mPage)
+            uiThread {
+                mLoading = false
+                when {
+                    data == null -> {
+                        toast("笑话加载失败")
+                        return@uiThread
+                    }
+                    mRecyclerView.adapter == null -> {
+                        mData.addAll(data)
+                        initAdapter()
+                    }
+                    mPage > 1 -> {
+                        val index = mData.size
+                        mData.addAll(data)
+                        mRecyclerView.adapter.notifyItemRangeInserted(index, data.size)
+                    }
+//                     如果是第一页的数据就开始 清除以前的
+                    else -> {
+                        mData.clear()
+                        mData.addAll(data)
+                        mRecyclerView.adapter.notifyDataSetChanged()
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    private fun initAdapter() {
+        mRecyclerView.adapter = JokeAdapter(mData)
 
     }
 
