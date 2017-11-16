@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.jiang.myapplication.R
 import com.example.jiang.myapplication.model.bean.Joke
 import com.example.jiang.myapplication.model.bean.Rhesis
+import com.example.jiang.myapplication.module.ListBaseAdapter
 import kotlinx.android.synthetic.main.item_joke.view.*
 import org.jetbrains.anko.find
 import java.util.regex.Pattern
@@ -15,22 +16,16 @@ import java.util.regex.Pattern
 /**
  * Created by BigManing on 17-11-15.
  * 邮箱：lingshui2008@qq.com
- *
+ *  励志adapter
  */
-class EncouragementAdapter(var mData: List<Rhesis>) : RecyclerView.Adapter<EncouragementAdapter.MyViewHolder>() {
-    override fun getItemCount(): Int = mData.size
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_joke, parent, false)
-        view.title.visibility = View.GONE
-        return MyViewHolder(view)
+class EncouragementAdapter(override var mData: List<Rhesis>) : ListBaseAdapter<Rhesis>(mData) {
+    override fun setItemData(holder: ListBaseAdapter.MyViewHolder, itemData: Rhesis, position: Int) {
+        holder.item.title.text = mData[position].english
+        holder.item.content.text = mData[position].chinese
     }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
-
-        holder.item.content.text = mData[position].english + "\n\n" + mData[position].chinese
-    }
-
-    class MyViewHolder(val item: View) : RecyclerView.ViewHolder(item)
+//    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ListBaseAdapter.MyViewHolder {
+//        val onCreateViewHolder = super.onCreateViewHolder(parent, viewType)
+//        onCreateViewHolder.item.title.visibility = View.GONE
+//        return onCreateViewHolder
+//    }
 }

@@ -24,7 +24,7 @@ class TextFragment : Fragment() {
 
     val tabs: Array<String> = arrayOf("墨客段子", "励志深度")
     //    懒加载
-    val fragments: Array<Fragment> by lazy { arrayOf(JokeFragment(), EncouragementFragment()) }
+    val fragments: Array<out Fragment> by lazy { arrayOf(JokeFragment(), EncouragementFragment()) }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_text, container, false)
