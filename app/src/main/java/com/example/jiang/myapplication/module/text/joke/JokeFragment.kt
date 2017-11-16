@@ -30,7 +30,7 @@ class JokeFragment : Fragment() {
     var mPage = 1
     //     标示变更后  相应的
     var mLoading by Delegates.observable(true) { _, _, newValue ->
-        mSwipeRefreshLayout.isRefreshing = newValue
+        mSwipeRefreshLayout?.isRefreshing = newValue
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
