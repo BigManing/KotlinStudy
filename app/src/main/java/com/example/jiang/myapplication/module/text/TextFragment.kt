@@ -1,21 +1,16 @@
 package com.example.jiang.myapplication.module.text
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
-import android.widget.TextView
 
 import com.example.jiang.myapplication.R
-import com.example.jiang.myapplication.module.text.joke.HardFragment
+import com.example.jiang.myapplication.module.text.encouragement.EncouragementFragment
 import com.example.jiang.myapplication.module.text.joke.JokeFragment
 import kotlinx.android.synthetic.main.fragment_text.*
 
@@ -29,7 +24,7 @@ class TextFragment : Fragment() {
 
     val tabs: Array<String> = arrayOf("墨客段子", "励志深度")
     //    懒加载
-    val fragments: Array<Fragment> by lazy { arrayOf(JokeFragment(), HardFragment()) }
+    val fragments: Array<Fragment> by lazy { arrayOf(JokeFragment(), EncouragementFragment()) }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater!!.inflate(R.layout.fragment_text, container, false)

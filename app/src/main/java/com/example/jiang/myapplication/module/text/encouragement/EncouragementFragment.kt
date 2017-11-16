@@ -1,4 +1,4 @@
-package com.example.jiang.myapplication.module.text.joke
+package com.example.jiang.myapplication.module.text.encouragement
 
 
 import android.os.Bundle
@@ -16,14 +16,11 @@ import com.example.jiang.myapplication.R
  * 励志界面
  */
 
-class HardFragment : Fragment() {
+class EncouragementFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_hard, container, false)
+        return inflater!!.inflate(R.layout.fragment_joke, container, false)
     }
-
-
 }
