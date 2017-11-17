@@ -33,7 +33,7 @@ class Ex {
         //    if not null 缩写
         println(files?.size)
 
-        //    if not null  else 缩写 todo 这里 ？ 是什么意思
+        //    if not null  else 缩写 todo   ?. 不为空才执行    ？：  前面为空 执行后面
         println(files?.size ?: "empty")
 
         //        //    if not null 缩写

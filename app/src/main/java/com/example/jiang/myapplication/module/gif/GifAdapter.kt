@@ -100,7 +100,7 @@ class GifAdapter(mData: List<Gif>) : ListBaseAdapter<Gif>(mData) {
 //                    .into(holder.item.gifImageView)
 //        }
 
-//        todo 多张图片同时下载  图片会抖动 待解决
+//        todo 多张图片同时下载  图片会抖动 待解决   性能优化
         holder.itemView.setOnClickListener {
             pause()
             ProgressDownload.downloadPhoto(itemData.img, object : ProgressListener {
