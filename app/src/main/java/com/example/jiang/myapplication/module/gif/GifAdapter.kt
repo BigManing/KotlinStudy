@@ -18,10 +18,12 @@ import com.example.jiang.myapplication.commen.download.ProgressListener
 import com.example.jiang.myapplication.commen.util.ScreenUtil
 import com.example.jiang.myapplication.model.bean.Gif
 import com.example.jiang.myapplication.module.ListBaseAdapter
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.item_gif.view.*
 import org.jetbrains.anko.ScreenSize
 import org.jetbrains.anko.displayMetrics
 import pl.droidsonroids.gif.GifDrawable
+import pl.droidsonroids.gif.GifImageView
 
 /**
  * Created by BigManing on 17-11-16.
@@ -31,11 +33,13 @@ import pl.droidsonroids.gif.GifDrawable
 
 class GifAdapter(mData: List<Gif>) : ListBaseAdapter<Gif>(mData) {
     var d: GifDrawable? = null
+    var currentView: GifImageView? = null
     var mHeights = hashMapOf<Int, Int>()
     fun pause(): Unit {
         d?.pause()
-
+//        (currentView?.drawable as?  com.bumptech.glide.load.resource.gif.GifDrawable)?.stop()
     }
+
     override fun getResourceId() = R.layout.item_gif
     override fun setItemData(holder: MyViewHolder, itemData: Gif, position: Int) {
         /*主要预加图片 设置view 站位大小*/
@@ -76,7 +80,27 @@ class GifAdapter(mData: List<Gif>) : ListBaseAdapter<Gif>(mData) {
             holder.item.textView.text = itemData.title
             holder.item.textView.visibility = View.VISIBLE
         }
+//
+//        holder.itemView.setOnClickListener {
+//            pause()
+//            Glide.with(holder.itemView).asGif().load(itemData.img)
+//                    .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.RESOURCE))
+//                    .listener(object : RequestListener<com.bumptech.glide.load.resource.gif.GifDrawable> {
+//                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<com.bumptech.glide.load.resource.gif.GifDrawable>?, isFirstResource: Boolean): Boolean {
+//                            println("图片加载失败 = ${itemData.img}")
+//                            return false
+//                        }
+//
+//                        override fun onResourceReady(resource: com.bumptech.glide.load.resource.gif.GifDrawable?, model: Any?, target: Target<com.bumptech.glide.load.resource.gif.GifDrawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+//                            Logger.d("图片加载完成 = ${itemData.img}")
+//                            currentView=holder.item.gifImageView
+//                            return false
+//                        }
+//                    })
+//                    .into(holder.item.gifImageView)
+//        }
 
+//        todo 多张图片同时下载  图片会抖动 待解决
         holder.itemView.setOnClickListener {
             pause()
             ProgressDownload.downloadPhoto(itemData.img, object : ProgressListener {
@@ -101,5 +125,6 @@ class GifAdapter(mData: List<Gif>) : ListBaseAdapter<Gif>(mData) {
 
             })
         }
+
     }
 }

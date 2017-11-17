@@ -12,12 +12,16 @@ import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
 import com.example.jiang.myapplication.commen.preference
+import com.example.jiang.myapplication.commen.util.FileUtils
 import com.example.jiang.myapplication.module.gif.GifFragment
 import com.example.jiang.myapplication.module.pic.PicFragment
 import com.example.jiang.myapplication.module.text.TextFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
+import java.io.File
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
+
     /** 初始化操作*/
     private fun init() {
         setSupportActionBar(toolbar)
@@ -61,8 +66,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onDrawerOpened(drawerView: View?) {
-                navigationView.menu.findItem(R.id.nav_clear).title = "清理缓存${10}M"
+                doAsync {
+                    val cacheFileSize = FileUtils.getCacheFileSize(Glide.getPhotoCacheDir(this@MainActivity)!!)
+                    uiThread {
+                        navigationView.menu.findItem(R.id.nav_clear).title = "清理缓存${FileUtils.getPrintSize(cacheFileSize)}"
+
+                    }
+                }
+
             }
+
+
         })
 //        navigation  item  点击监听
         navigationView.setNavigationItemSelectedListener { item ->
@@ -77,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                     switchFragment(2, item)
                 }
                 R.id.nav_clear -> {
-                    toast("清理缓存")
+
                     true
                 }
                 R.id.nav_about -> {
@@ -93,6 +107,7 @@ class MainActivity : AppCompatActivity() {
 //         左侧头像
         Glide.with(this).load(R.mipmap.yhaolpz).into(navigationView.getHeaderView(0).find(R.id.avatar))
     }
+
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
