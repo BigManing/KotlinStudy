@@ -23,25 +23,27 @@ class GifFragment : ListBaseFragment<Gif>() {
     }
 
 
-}
-
-/*  override fun initEvent() {
-       super.initEvent()
-       mRecyclerView.addOnScrollListener(MyListener)
-   }
+    override fun initEvent() {
+        super.initEvent()
+        mRecyclerView.addOnScrollListener(MyListener)
+    }
 
 
-   override fun onDestroy() {
-       super.onDestroy()
-       // 摧毁的时候  去掉监听器
-       mRecyclerView?.removeOnScrollListener(MyListener)
-   }
-   object MyListener : RecyclerView.OnScrollListener() {
-       override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-           super.onScrolled(recyclerView, dx, dy)
-           pauseGif()
-       }
-   }*/
-fun pauseGif() {
+    override fun onDestroy() {
+        super.onDestroy()
+        // 摧毁的时候  去掉监听器
+        mRecyclerView?.removeOnScrollListener(MyListener)
+    }
 
+    override fun onPause() {
+        super.onPause()
+        (mRecyclerView?.adapter  as? GifAdapter)?.pause()
+    }
+
+    object MyListener : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            (recyclerView?.adapter  as? GifAdapter)?.pause()
+        }
+    }
 }

@@ -29,7 +29,7 @@ class APP : Application() {
 //                .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
 //                .tag("My custom tag")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build()
-
+        instance = this
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
     }
 }
