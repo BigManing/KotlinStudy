@@ -17,6 +17,7 @@ import com.example.jiang.myapplication.module.gif.GifFragment
 import com.example.jiang.myapplication.module.pic.PicFragment
 import com.example.jiang.myapplication.module.text.TextFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_joke.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
@@ -73,6 +74,8 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
+//                这个界面的时候  就要停止gif 的加载
+                (mFragments[2] as GifFragment).adapter?.pause()
 
             }
 
@@ -91,7 +94,20 @@ class MainActivity : AppCompatActivity() {
                     switchFragment(2, item)
                 }
                 R.id.nav_clear -> {
+                    navigationView.menu.findItem(R.id.nav_clear).title = "正在清理中..."
+                    doAsync {
+                        FileUtils.cleanCache()
+                        uiThread {
+                            toast("清理完成")
+                            doAsync {
+                                val cacheFileSize = FileUtils.getCacheFileSize(Glide.getPhotoCacheDir(this@MainActivity)!!)
+                                uiThread {
+                                    navigationView.menu.findItem(R.id.nav_clear).title = "清理缓存${FileUtils.getPrintSize(cacheFileSize)}"
 
+                                }
+                            }
+                        }
+                    }
                     true
                 }
                 R.id.nav_about -> {

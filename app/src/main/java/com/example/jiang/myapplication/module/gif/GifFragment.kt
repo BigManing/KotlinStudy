@@ -16,10 +16,12 @@ import kotlinx.android.synthetic.main.fragment_joke.*
  */
 
 class GifFragment : ListBaseFragment<Gif>() {
+    var adapter: GifAdapter? = null
     override fun getData(mPage: Int) = GifService.getData(mPage)
 
     override fun getAdapter(mData: List<Gif>): ListBaseAdapter<Gif> {
-        return GifAdapter(mData)
+        adapter = GifAdapter(mData)
+        return adapter as GifAdapter
     }
 
 

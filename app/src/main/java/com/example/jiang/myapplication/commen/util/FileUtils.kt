@@ -1,5 +1,7 @@
 package com.example.jiang.myapplication.commen.util
 
+import com.bumptech.glide.Glide
+import com.example.jiang.myapplication.APP
 import java.io.File
 
 /**
@@ -45,6 +47,16 @@ class FileUtils {
 
         private fun save2float(n: Float): String {
             return "(" + (Math.round(n * 100).toFloat() / 100).toString()
+        }
+
+        fun cleanCache(): Boolean {
+            val photoCacheDir = Glide.getPhotoCacheDir(APP.instance)
+            if (photoCacheDir != null) {
+                return photoCacheDir.deleteRecursively()
+
+            }
+            return true
+
         }
     }
 }
