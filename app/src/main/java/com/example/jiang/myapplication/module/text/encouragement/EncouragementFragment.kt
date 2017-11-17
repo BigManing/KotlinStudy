@@ -3,7 +3,6 @@ package com.example.jiang.myapplication.module.text.encouragement
 
 import com.example.jiang.myapplication.model.bean.Rhesis
 import com.example.jiang.myapplication.model.service.EncouragementService
-import com.example.jiang.myapplication.model.service.JokerService
 import com.example.jiang.myapplication.module.ListBaseAdapter
 import com.example.jiang.myapplication.module.ListBaseFragment
 

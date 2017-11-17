@@ -38,7 +38,7 @@ abstract class ListBaseFragment<T> : Fragment() {
         loadData()
     }
 
-    private fun initEvent() {
+    open fun initEvent() {
 //         刷新加载数据
         mSwipeRefreshLayout.setOnRefreshListener {
             mPage = 1  // 这是手动刷新 来获取最新的数据
@@ -65,7 +65,7 @@ abstract class ListBaseFragment<T> : Fragment() {
                         toast("笑话加载失败")
                         return@uiThread
                     }
-                    mRecyclerView.adapter == null -> {
+                    mRecyclerView?.adapter == null -> {
                         mData.addAll(data)
                         mRecyclerView.adapter = getAdapter(mData)
 

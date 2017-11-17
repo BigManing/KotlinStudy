@@ -17,8 +17,10 @@ abstract class ListBaseAdapter<T>(open var mData: List<T>) : RecyclerView.Adapte
     override fun getItemCount(): Int = mData.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.item_joke, parent, false))
+        return MyViewHolder(LayoutInflater.from(parent?.context).inflate(getResourceId(), parent, false))
     }
+
+    open fun getResourceId() = R.layout.item_joke
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         setItemData(holder, mData[position], position)
