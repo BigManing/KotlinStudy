@@ -3,6 +3,7 @@ package com.example.jiang.myapplication.commen
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.Preference
+import com.example.jiang.myapplication.APP
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -50,3 +51,21 @@ class MyPreference<T>(val context: Context, val name: String, val default: T) : 
     }
 }
 
+///////////////////////////////////////////////////////////////////////////
+// notnull委托  只能复制一次 多次复制抛异常
+///////////////////////////////////////////////////////////////////////////
+fun notNullSingleValue(): ReadWriteProperty<APP.Companion, APP> = NotNullSingleValueVar()
+
+class NotNullSingleValueVar : ReadWriteProperty<APP.Companion, APP> {
+    private var value: APP? = null
+    override fun getValue(thisRef: APP.Companion, property: KProperty<*>): APP {
+        return value ?: throw IllegalStateException("not init")
+    }
+
+    override fun setValue(thisRef: APP.Companion, property: KProperty<*>, value: APP) {
+        if (this.value == null) {
+            this.value = value
+        }
+    }
+
+}
