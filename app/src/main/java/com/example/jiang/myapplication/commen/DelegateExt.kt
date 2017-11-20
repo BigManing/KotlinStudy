@@ -54,15 +54,15 @@ class MyPreference<T>(val context: Context, val name: String, val default: T) : 
 ///////////////////////////////////////////////////////////////////////////
 // notnull委托  只能复制一次 多次复制抛异常
 ///////////////////////////////////////////////////////////////////////////
-fun notNullSingleValue(): ReadWriteProperty<APP.Companion, APP> = NotNullSingleValueVar()
+fun <T> notNullSingleValue(): ReadWriteProperty<Any?, T> = NotNullSingleValueVar()
 
-class NotNullSingleValueVar : ReadWriteProperty<APP.Companion, APP> {
-    private var value: APP? = null
-    override fun getValue(thisRef: APP.Companion, property: KProperty<*>): APP {
+class NotNullSingleValueVar<T> : ReadWriteProperty<Any?, T> {
+    private var value: T? = null
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T {
         return value ?: throw IllegalStateException("not init")
     }
 
-    override fun setValue(thisRef: APP.Companion, property: KProperty<*>, value: APP) {
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
         if (this.value == null) {
             this.value = value
         }
