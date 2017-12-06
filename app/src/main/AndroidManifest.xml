@@ -20,7 +20,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.pic.BigPicActivity" />
+        <!-- 在需要时 开启进程   这个是在服务端配置的 -->
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
 
+                <action android:name="com.example.tee.testapplication.aidl.IMyAidlInterface" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".client.AIDLClient"></activity>
     </application>
 
 </manifest>
